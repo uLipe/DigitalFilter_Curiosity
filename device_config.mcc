@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration device="PIC16F1619" mcc_version="v2.25.2">
+    <managers>
+        <manager generated="true" name="Pin Manager" reloadPin="manual">
+            <setting name="package" option="PDIP20"/>
+            <setting name="sorting" option="true"/>
+            <resource customName="DAC1OUT" digital="false" direction="OUTPUT" function="DAC1OUT" ioc="0" module="DAC1" name="RA0" start="false" type="pin" wpu="false"/>
+            <resource customName="channel_AN1" digital="false" direction="INPUT" function="AN1" ioc="0" module="ADC1" name="RA1" start="false" type="pin" wpu="false"/>
+            <resource customName="channel_AN4" digital="false" direction="INPUT" function="AN4" ioc="0" module="ADC1" name="RC0" start="false" type="pin" wpu="false"/>
+            <file checksum="3021312160" modified="false" name="pin_manager.c" path="mcc_generated_files/pin_manager.c"/>
+            <file checksum="3643686458" modified="false" name="pin_manager.h" path="mcc_generated_files/pin_manager.h"/>
+        </manager>
+        <manager generated="true" name="System" reloadPin="manual">
+            <initializer comment="" name="Initialize">
+                <setting name="SCS" option="INTOSC" register="OSCCON"/>
+                <setting name="SPLLEN" option="enabled" register="OSCCON"/>
+                <setting name="IRCF" option="8MHz_HF" register="OSCCON"/>
+                <setting name="LFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFL" option="not2percent_acc" register="OSCSTAT"/>
+                <setting name="OSTS" option="intosc" register="OSCSTAT"/>
+                <setting name="PLLR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFS" option="not0.5percent_acc" register="OSCSTAT"/>
+                <setting name="HFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="MFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="TUN" option="0x0" register="OSCTUNE"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <initializer comment="" name="InitializeNew">
+                <setting name="SCS" option="FOSC" register="OSCCON"/>
+                <setting name="SPLLEN" option="disabled" register="OSCCON"/>
+                <setting name="IRCF" option="500KHz_MF" register="OSCCON"/>
+                <setting name="LFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFL" option="not2percent_acc" register="OSCSTAT"/>
+                <setting name="OSTS" option="intosc" register="OSCSTAT"/>
+                <setting name="PLLR" option="disabled" register="OSCSTAT"/>
+                <setting name="HFIOFS" option="not0.5percent_acc" register="OSCSTAT"/>
+                <setting name="HFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="MFIOFR" option="disabled" register="OSCSTAT"/>
+                <setting name="TUN" option="0x0" register="OSCTUNE"/>
+                <additionalSetting name="pllMultiplier" option=""/>
+                <additionalSetting name="extclk" option="1.0 MHz"/>
+            </initializer>
+            <setting name="CLKOUTEN" option="OFF"/>
+            <setting name="FCMEN" option="ON"/>
+            <setting name="MCLRE" option="OFF"/>
+            <setting name="FOSC" option="INTOSC"/>
+            <setting name="BOREN" option="ON"/>
+            <setting name="IESO" option="ON"/>
+            <setting name="PWRTE" option="OFF"/>
+            <setting name="CP" option="OFF"/>
+            <setting name="PLLEN" option="OFF"/>
+            <setting name="LPBOR" option="OFF"/>
+            <setting name="LVP" option="ON"/>
+            <setting name="WRT" option="OFF"/>
+            <setting name="ZCD" option="OFF"/>
+            <setting name="STVREN" option="ON"/>
+            <setting name="PPS1WAY" option="OFF"/>
+            <setting name="BORV" option="LO"/>
+            <setting name="WDTCWS" option="WDTCWSSW"/>
+            <setting name="WDTCPS" option="WDTCPS1F"/>
+            <setting name="WDTE" option="OFF"/>
+            <setting name="WDTCCS" option="SWC"/>
+            <setting name="generateConfigBits" option="true"/>
+            <file checksum="394656806" modified="true" name="mcc.c" path="mcc_generated_files/mcc.c"/>
+            <file checksum="1103852241" modified="false" name="mcc.h" path="mcc_generated_files/mcc.h"/>
+        </manager>
+        <manager generated="true" name="Interrupt Manager" reloadPin="manual">
+            <setting name="preemptHigh" option="true"/>
+            <setting name="preemptLow" option="true"/>
+            <setting name="useIPEN" option="false"/>
+            <file checksum="1747898320" modified="false" name="interrupt_manager.c" path="mcc_generated_files/interrupt_manager.c"/>
+            <file checksum="3737450764" modified="false" name="interrupt_manager.h" path="mcc_generated_files/interrupt_manager.h"/>
+            <interrupt module="TMR1" name="TMRI" priority="2"/>
+            <interrupt module="ADC1" name="ADI" priority="2"/>
+        </manager>
+    </managers>
+    <modules>
+        <module generated="true" mode="ADC" name="ADC1" order="0" reloadPin="manual_auto" type="adc_sarcore_10bit">
+            <initializer comment="" name="Initialize">
+                <setting name="GO_nDONE" option="stop" register="ADCON0"/>
+                <setting name="ADON" option="enabled" register="ADCON0"/>
+                <setting name="CHS" option="AN0" register="ADCON0"/>
+                <setting name="ADFM" option="left" register="ADCON1"/>
+                <setting name="ADPREF" option="VDD" register="ADCON1"/>
+                <setting name="ADCS" option="FOSC/16" register="ADCON1"/>
+                <setting name="TRIGSEL" option="no_auto_trigger" register="ADCON2"/>
+                <setting name="ADRESL" option="0x0" register="ADRESL"/>
+                <setting name="ADRESH" option="0x0" register="ADRESH"/>
+            </initializer>
+            <setting name="ADI" option="true"/>
+            <resource customName="channel_AN1" function="AN1" name="RA1" type="pin"/>
+            <resource customName="channel_AN4" function="AN4" name="RC0" type="pin"/>
+            <file checksum="2394570194" modified="true" name="adc1.c" path="mcc_generated_files/adc1.c"/>
+            <file checksum="1158607281" modified="false" name="adc1.h" path="mcc_generated_files/adc1.h"/>
+        </module>
+        <module generated="true" mode="DAC" name="DAC1" order="1" reloadPin="auto" type="dac_8bit">
+            <initializer comment="" name="Initialize">
+                <setting name="DAC1EN" option="enabled" register="DAC1CON0"/>
+                <setting name="DAC1OE" option="enabled" register="DAC1CON0"/>
+                <setting name="DAC1PSS" option="VDD" register="DAC1CON0"/>
+                <setting name="DAC1R" option="0x0" register="DAC1CON1"/>
+            </initializer>
+            <initializer comment="" name="InitializeNew">
+                <setting name="DAC1EN" option="enabled" register="DAC1CON0"/>
+                <setting name="DAC1OE" option="disabled" register="DAC1CON0"/>
+                <setting name="DAC1PSS" option="VDD" register="DAC1CON0"/>
+                <setting name="DAC1R" option="0x0" register="DAC1CON1"/>
+            </initializer>
+            <file checksum="2096215414" modified="false" name="dac1.c" path="mcc_generated_files/dac1.c"/>
+            <file checksum="1863671889" modified="false" name="dac1.h" path="mcc_generated_files/dac1.h"/>
+        </module>
+        <module generated="true" mode="Default" name="MATHACC" order="2" reloadPin="auto" type="math_progmac">
+            <initializer comment="" name="Initialize">
+                <setting name="PID1EN" option="enabled" register="PID1CON"/>
+                <setting name="PID1MODE" option="2's compl signed i/p, with acc" register="PID1CON"/>
+                <setting name="PID1BUSY" option="" register="PID1CON"/>
+                <setting name="PID1IN8" option="0" register="PID1INH"/>
+                <setting name="PID1IN9" option="0" register="PID1INH"/>
+                <setting name="PID1IN11" option="0" register="PID1INH"/>
+                <setting name="PID1IN10" option="0" register="PID1INH"/>
+                <setting name="PID1IN15" option="0" register="PID1INH"/>
+                <setting name="PID1IN14" option="0" register="PID1INH"/>
+                <setting name="PID1IN13" option="0" register="PID1INH"/>
+                <setting name="PID1IN12" option="0" register="PID1INH"/>
+                <setting name="PID1IN4" option="0" register="PID1INL"/>
+                <setting name="PID1IN3" option="0" register="PID1INL"/>
+                <setting name="PID1IN6" option="0" register="PID1INL"/>
+                <setting name="PID1IN5" option="0" register="PID1INL"/>
+                <setting name="PID1IN7" option="0" register="PID1INL"/>
+                <setting name="PID1IN0" option="0" register="PID1INL"/>
+                <setting name="PID1IN2" option="0" register="PID1INL"/>
+                <setting name="PID1IN1" option="0" register="PID1INL"/>
+                <setting name="PID1SET14" option="0" register="PID1SETH"/>
+                <setting name="PID1SET13" option="0" register="PID1SETH"/>
+                <setting name="PID1SET12" option="0" register="PID1SETH"/>
+                <setting name="PID1SET11" option="0" register="PID1SETH"/>
+                <setting name="PID1SET10" option="0" register="PID1SETH"/>
+                <setting name="PID1SET9" option="0" register="PID1SETH"/>
+                <setting name="PID1SET8" option="0" register="PID1SETH"/>
+                <setting name="PID1SET15" option="0" register="PID1SETH"/>
+                <setting name="PID1SET3" option="0" register="PID1SETL"/>
+                <setting name="PID1SET2" option="0" register="PID1SETL"/>
+                <setting name="PID1SET1" option="0" register="PID1SETL"/>
+                <setting name="PID1SET0" option="0" register="PID1SETL"/>
+                <setting name="PID1SET7" option="0" register="PID1SETL"/>
+                <setting name="PID1SET6" option="0" register="PID1SETL"/>
+                <setting name="PID1SET5" option="0" register="PID1SETL"/>
+                <setting name="PID1SET4" option="0" register="PID1SETL"/>
+                <setting name="PID1K115" option="0" register="PID1K1H"/>
+                <setting name="PID1K19" option="0" register="PID1K1H"/>
+                <setting name="PID1K18" option="0" register="PID1K1H"/>
+                <setting name="PID1K110" option="0" register="PID1K1H"/>
+                <setting name="PID1K114" option="0" register="PID1K1H"/>
+                <setting name="PID1K113" option="0" register="PID1K1H"/>
+                <setting name="PID1K112" option="0" register="PID1K1H"/>
+                <setting name="PID1K111" option="0" register="PID1K1H"/>
+                <setting name="PID1K15" option="0" register="PID1K1L"/>
+                <setting name="PID1K14" option="0" register="PID1K1L"/>
+                <setting name="PID1K17" option="0" register="PID1K1L"/>
+                <setting name="PID1K16" option="0" register="PID1K1L"/>
+                <setting name="PID1K11" option="0" register="PID1K1L"/>
+                <setting name="PID1K10" option="0" register="PID1K1L"/>
+                <setting name="PID1K13" option="0" register="PID1K1L"/>
+                <setting name="PID1K12" option="0" register="PID1K1L"/>
+                <setting name="PID1K28" option="0" register="PID1K2H"/>
+                <setting name="PID1K215" option="0" register="PID1K2H"/>
+                <setting name="PID1K214" option="0" register="PID1K2H"/>
+                <setting name="PID1K29" option="0" register="PID1K2H"/>
+                <setting name="PID1K213" option="0" register="PID1K2H"/>
+                <setting name="PID1K212" option="0" register="PID1K2H"/>
+                <setting name="PID1K211" option="0" register="PID1K2H"/>
+                <setting name="PID1K210" option="0" register="PID1K2H"/>
+                <setting name="PID1K26" option="0" register="PID1K2L"/>
+                <setting name="PID1K25" option="0" register="PID1K2L"/>
+                <setting name="PID1K27" option="0" register="PID1K2L"/>
+                <setting name="PID1K20" option="0" register="PID1K2L"/>
+                <setting name="PID1K22" option="0" register="PID1K2L"/>
+                <setting name="PID1K21" option="0" register="PID1K2L"/>
+                <setting name="PID1K24" option="0" register="PID1K2L"/>
+                <setting name="PID1K23" option="0" register="PID1K2L"/>
+                <setting name="PID1K315" option="0" register="PID1K3H"/>
+                <setting name="PID1K39" option="0" register="PID1K3H"/>
+                <setting name="PID1K314" option="0" register="PID1K3H"/>
+                <setting name="PID1K38" option="0" register="PID1K3H"/>
+                <setting name="PID1K313" option="0" register="PID1K3H"/>
+                <setting name="PID1K312" option="0" register="PID1K3H"/>
+                <setting name="PID1K311" option="0" register="PID1K3H"/>
+                <setting name="PID1K310" option="0" register="PID1K3H"/>
+                <setting name="PID1K37" option="0" register="PID1K3L"/>
+                <setting name="PID1K36" option="0" register="PID1K3L"/>
+                <setting name="PID1K31" option="0" register="PID1K3L"/>
+                <setting name="PID1K30" option="0" register="PID1K3L"/>
+                <setting name="PID1K33" option="0" register="PID1K3L"/>
+                <setting name="PID1K32" option="0" register="PID1K3L"/>
+                <setting name="PID1K35" option="0" register="PID1K3L"/>
+                <setting name="PID1K34" option="0" register="PID1K3L"/>
+                <setting name="PID1OUT35" option="0" register="PID1OUTU"/>
+                <setting name="PID1OUT33" option="0" register="PID1OUTU"/>
+                <setting name="PID1OUT34" option="0" register="PID1OUTU"/>
+                <setting name="PID1OUT32" option="0" register="PID1OUTU"/>
+                <setting name="PID1OUT28" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT29" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT26" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT27" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT24" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT25" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT31" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT30" option="0" register="PID1OUTHH"/>
+                <setting name="PID1OUT17" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT18" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT16" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT22" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT23" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT20" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT21" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT19" option="0" register="PID1OUTHL"/>
+                <setting name="PID1OUT15" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT13" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT14" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT8" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT11" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT9" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT12" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT10" option="0" register="PID1OUTLH"/>
+                <setting name="PID1OUT6" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT7" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT4" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT5" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT2" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT3" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT0" option="0" register="PID1OUTLL"/>
+                <setting name="PID1OUT1" option="0" register="PID1OUTLL"/>
+                <setting name="PID1Z116" option="0" register="PID1Z1U"/>
+                <setting name="PID1Z18" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z112" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z113" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z19" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z110" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z111" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z114" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z115" option="0" register="PID1Z1H"/>
+                <setting name="PID1Z17" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z15" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z16" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z10" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z13" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z14" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z11" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z12" option="0" register="PID1Z1L"/>
+                <setting name="PID1Z216" option="0" register="PID1Z2U"/>
+                <setting name="PID1Z28" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z29" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z211" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z212" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z210" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z215" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z213" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z214" option="0" register="PID1Z2H"/>
+                <setting name="PID1Z26" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z27" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z20" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z21" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z24" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z25" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z22" option="0" register="PID1Z2L"/>
+                <setting name="PID1Z23" option="0" register="PID1Z2L"/>
+                <setting name="PID1ACC33" option="0" register="PID1ACCU"/>
+                <setting name="PID1ACC32" option="0" register="PID1ACCU"/>
+                <setting name="PID1ACC34" option="0" register="PID1ACCU"/>
+                <setting name="PID1ACC28" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC27" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC29" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC31" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC30" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC24" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC26" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC25" option="0" register="PID1ACCHH"/>
+                <setting name="PID1ACC17" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC16" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC19" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC18" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC20" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC22" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC21" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC23" option="0" register="PID1ACCHL"/>
+                <setting name="PID1ACC9" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC8" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC11" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC10" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC13" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC12" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC15" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC14" option="0" register="PID1ACCLH"/>
+                <setting name="PID1ACC7" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC6" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC5" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC4" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC3" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC2" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC1" option="0" register="PID1ACCLL"/>
+                <setting name="PID1ACC0" option="0" register="PID1ACCLL"/>
+                <additionalSetting name="K3_Value" option="1"/>
+                <additionalSetting name="Scalar_Value" option="1"/>
+                <additionalSetting name="outputChanged" option="accumulated"/>
+                <additionalSetting name="Kd_Value" option="0"/>
+                <additionalSetting name="A_Value" option="0"/>
+                <additionalSetting name="K2_Value" option="1"/>
+                <additionalSetting name="Kp_Value" option="0"/>
+                <additionalSetting name="C_Value" option="1"/>
+                <additionalSetting name="operationChanged" option="only Multiply"/>
+                <additionalSetting name="B_Value" option="0"/>
+                <additionalSetting name="K1_Value" option="1"/>
+                <additionalSetting name="Time_Value" option="1"/>
+                <additionalSetting name="inputChanged" option="2's complement signed inputs"/>
+                <additionalSetting name="Ki_Value" option="0"/>
+                <additionalSetting name="modeChanged" option="Add/Multiply"/>
+            </initializer>
+            <setting name="PIDDI" option="false"/>
+            <setting name="PIDEI" option="false"/>
+            <file checksum="3114224142" modified="false" name="mathacc.c" path="mcc_generated_files/mathacc.c"/>
+            <file checksum="696201686" modified="false" name="mathacc.h" path="mcc_generated_files/mathacc.h"/>
+        </module>
+        <module generated="true" mode="Timer" name="TMR1" order="3" reloadPin="manual" type="tmr_mid1">
+            <initializer comment="" name="Initialize">
+                <setting name="T1CKPS" option="1:1" register="T1CON"/>
+                <setting name="TMR1CS" option="FOSC/4" register="T1CON"/>
+                <setting name="nT1SYNC" option="synchronize" register="T1CON"/>
+                <setting name="TMR1ON" option="disabled" register="T1CON"/>
+                <setting name="T1GTM" option="disabled" register="T1GCON"/>
+                <setting name="T1GPOL" option="low" register="T1GCON"/>
+                <setting name="T1GVAL" option="disabled" register="T1GCON"/>
+                <setting name="TMR1GE" option="disabled" register="T1GCON"/>
+                <setting name="T1GSS" option="T1G" register="T1GCON"/>
+                <setting name="T1GGO_nDONE" option="done" register="T1GCON"/>
+                <setting name="T1GSPM" option="disabled" register="T1GCON"/>
+                <setting name="TMR1H" option="255" register="TMR1H"/>
+                <setting name="TMR1L" option="6" register="TMR1L"/>
+                <additionalSetting name="timerstart" option="enabled"/>
+                <additionalSetting name="externalFreq" option=""/>
+            </initializer>
+            <setting name="TMRI" option="true"/>
+            <setting name="TMRGI" option="false"/>
+            <setting name="ticker" option="1"/>
+            <setting name="hasGate" option="true"/>
+            <file checksum="3544697544" modified="true" name="tmr1.c" path="mcc_generated_files/tmr1.c"/>
+            <file checksum="1606122594" modified="false" name="tmr1.h" path="mcc_generated_files/tmr1.h"/>
+        </module>
+    </modules>
+</configuration>

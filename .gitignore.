@@ -1,0 +1,16 @@
+
+*.o
+*.a
+*.cmf
+*.ld
+*.hex
+*.map
+*.lst
+*.pre
+*.hex
+*.mcu
+*.obj
+*.pum
+*.sdb
+*.elf
+*.rlf
