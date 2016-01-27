@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC Macro Assembler V1.35 build -356382666 
-                                                                                                           Sun Jan 24 20:09:41 2016
+                                                                                                           Wed Jan 27 00:45:57 2016
 
 
      1                           	processor	16F1619
@@ -232,7 +232,7 @@ Microchip Technology PIC Macro Assembler V1.35 build -356382666
 
 
 Microchip Technology PIC Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                               Sun Jan 24 20:09:41 2016
+Symbol Table                                                                                               Wed Jan 27 00:45:57 2016
 
                              BSR 0008                            bsrTmp 0267                            wait_1 027D  
                           wait_2 028B                            wait_3 0299                            wait_4 02A7  

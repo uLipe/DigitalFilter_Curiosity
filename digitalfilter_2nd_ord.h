@@ -62,7 +62,7 @@ iirflt* iirInit( const int16_t *a_coeffs, const int16_t *b_coeffs);
 // @param[2] input - current input sample (referred as x[n])
 // @return   none  
 //
-void iirDoFilter(iirflt *f, int16_t input);
+void iirDoFilter(iirflt   *f, int16_t input);
 
 //
 // @fn      iirGetOutValue()
