@@ -1,0 +1,53 @@
+
+Psect Usage Map:
+
+ Psect      | Contents                           | Memory Range  | Size
+------------|------------------------------------|---------------|-------------
+ reset_vec  | Reset vector                       | 0000h - 0001h |   2 words  
+ intentry   | Interrupt context entry code       | 0004h - 001Fh |  28 words  
+ end_init   | Initialization code                | 0020h - 0021h |   2 words  
+ cinit      | Initialization code                | 0022h - 003Ch |  27 words  
+ maintext   | Program code for main() function   | 003Dh - 0134h | 248 words  
+ text17     | Program and library code           | 0135h - 01F0h | 188 words  
+ text1      | Program and library code           | 01F1h - 0266h | 118 words  
+ barfunc    |                                    | 0267h - 02CDh | 103 words  
+ text7      | Program and library code           | 02CEh - 02ECh |  31 words  
+ text3      | Program and library code           | 02EDh - 030Ah |  30 words  
+ text2      | Program and library code           | 030Bh - 031Ch |  18 words  
+ text4      | Program and library code           | 031Dh - 032Eh |  18 words  
+ text5      | Program and library code           | 032Fh - 033Fh |  17 words  
+ text13     | Program and library code           | 0340h - 034Eh |  15 words  
+ text14     | Program and library code           | 034Fh - 035Dh |  15 words  
+ text15     | Program and library code           | 035Eh - 036Bh |  14 words  
+ clrtext    | Memory clearing code               | 036Ch - 0377h |  12 words  
+ text11     | Program and library code           | 0382h - 038Bh |  10 words  
+ text8      | Program and library code           | 038Ch - 0391h |   6 words  
+ text10     | Program and library code           | 0392h - 0397h |   6 words  
+ text19     | Program and library code           | 0398h - 039Dh |   6 words  
+ text16     | Program and library code           | 039Eh - 03A2h |   5 words  
+ text18     | Program and library code           | 03A3h - 03A7h |   5 words  
+ text9      | Program and library code           | 03A8h - 03ABh |   4 words  
+ text6      | Program and library code           | 03ACh - 03AEh |   3 words  
+            |                                    |               |             
+ stringtext | Strings and constant data          | 0378h - 0381h |  10 words  
+------------|------------------------------------|---------------|-------------
+ cstackCOMM | Stack in common memory             | 0070h - 0075h |   6 bytes  
+ nvCOMMON   | Persistent RAM variables in common | 0076h - 0077h |   2 bytes  
+ bssCOMMON  | RAM variables in common memory     | 0078h - 0079h |   2 bytes  
+            |                                    |               |             
+ cstackBANK | Stack in bank 0                    | 0020h - 0042h |  35 bytes  
+ bssBANK0   | BSS variables in bank 0            | 0043h - 005Dh |  27 bytes  
+            |                                    |               |             
+ abs_s1     | Absolute RAM variables             | 007Eh - 007Fh |   2 bytes  
+ abs_s1     | Absolute RAM variables             | 02ECh - 02EFh |   4 bytes  
+ abs_s1     | Absolute RAM variables             | 0320h - 036Fh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 03A0h - 03EFh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 0420h - 046Fh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 04A0h - 04EFh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 0520h - 056Fh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 05A0h - 05EFh |  80 bytes  
+ abs_s1     | Absolute RAM variables             | 0620h - 063Fh |  32 bytes  
+------------|------------------------------------|---------------|-------------
+ config     |                                    | 8007h - 8009h |   3 words  
+------------|------------------------------------|---------------|-------------
+

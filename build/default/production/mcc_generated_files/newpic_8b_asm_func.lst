@@ -1,0 +1,245 @@
+
+
+Microchip Technology PIC Macro Assembler V1.35 build -356382666 
+                                                                                                           Sun Jan 24 20:09:41 2016
+
+
+     1                           	processor	16F1619
+     2                           	opt	pw 132
+     3                           	psect	barfunc,local,class=CODE,delta=2
+     4  007F                     	; PIC10/12/16
+     5                           
+     6                           	psect	barfunc
+     7                           
+     8                           ;
+     9                           ;
+    10                           ;
+    11                           ;
+    12                           ;
+    13                           ;
+    14                           ;
+    15                           ;
+    16                           ;
+    17                           ;
+    18                           ; Filter offsets:
+    19                           ;
+    20                           ;struct __iir
+    21                           ;{
+    22                           ;
+    23                           ; int16_t inputState[3];
+    24                           ; int16_t outputState[2];
+    25                           ; int16_t currentOutput;
+    26                           ;
+    27                           ;
+    28                           ; int16_t *pCoefTable_a[2];
+    29                           ; int16_t *pCoefTable_b[3];
+    30                           ;
+    31                           ;}
+    32  0267                     bsrTmp:	
+    33  0267                     	ds	1	; extern of bar function goes in the C source file
+    34  0268                     _iirFilter_2nd_Ord:	
+    35                           ;
+    36                           ; @fn iirFilter_2nd_Ord
+    37                           ; @brief main digital filter routine, optimzed with MATH ACC
+    38                           ; @param none
+    39                           ; @return none
+    40                           ;
+    41                           
+    42                           
+    43                           ;
+    44                           ; push bsr
+    45                           ;
+    46  0268  0808               	movf	8,w
+    47  0269  00E7               	movwf	bsrTmp& (0+127)
+    48                           
+    49                           ;
+    50                           ; points to PID acc register page:
+    51                           ;
+    52  026A  002C               	movlb	12
+    53                           
+    54                           ;
+    55                           ; Zero the acc:
+    56                           ;
+    57  026B  3000               	movlw	0
+    58  026C  0093               	movwf	1555
+    59  026D  0092               	movwf	1554
+    60  026E  0091               	movwf	1553
+    61  026F  0090               	movwf	1552
+    62  0270  008F               	movwf	1551
+    63  0271  002B               	movlb	11
+    64                           
+    65                           ;
+    66                           ; begin filter calculation:
+    67                           ;
+    68                           ;
+    69                           ; acc = x[n] * b[0]
+    70                           ;
+    71  0272  3F01               	moviw [1]fsr0
+    72  0273  0091               	movwf	1425
+    73  0274  3F00               	moviw [0]fsr0
+    74  0275  0090               	movwf	1424
+    75  0276  3F11               	moviw [17]fsr0
+    76  0277  008D               	movwf	1421
+    77  0278  3F10               	moviw [16]fsr0
+    78  0279  008C               	movwf	1420
+    79                           
+    80                           ;
+    81                           ; multiply & acc:
+    82                           ;
+    83  027A  018F               	clrf	1423
+    84  027B  018E               	clrf	1422
+    85  027C  002C               	movlb	12
+    86  027D                     wait_1:	
+    87  027D  1B14               	btfsc	1556,6
+    88  027E  2A7D               	bra	wait_1
+    89  027F  002B               	movlb	11
+    90                           
+    91                           ;
+    92                           ; acc += x[n - 1] * b[1]
+    93                           ;
+    94  0280  3F03               	moviw [3]fsr0
+    95  0281  0091               	movwf	1425
+    96  0282  3F02               	moviw [2]fsr0
+    97  0283  0090               	movwf	1424
+    98  0284  3F13               	moviw [19]fsr0
+    99  0285  008D               	movwf	1421
+   100  0286  3F12               	moviw [18]fsr0
+   101  0287  008C               	movwf	1420
+   102                           
+   103                           ;
+   104                           ; multiply & acc:
+   105                           ;
+   106  0288  018F               	clrf	1423
+   107  0289  018E               	clrf	1422
+   108  028A  002C               	movlb	12
+   109  028B                     wait_2:	
+   110  028B  1B14               	btfsc	1556,6
+   111  028C  2A8B               	bra	wait_2
+   112  028D  002B               	movlb	11
+   113                           
+   114                           ;
+   115                           ; acc += x[n - 2] * b[2]
+   116                           ;
+   117  028E  3F05               	moviw [5]fsr0
+   118  028F  0091               	movwf	1425
+   119  0290  3F04               	moviw [4]fsr0
+   120  0291  0090               	movwf	1424
+   121  0292  3F15               	moviw [21]fsr0
+   122  0293  008D               	movwf	1421
+   123  0294  3F14               	moviw [20]fsr0
+   124  0295  008C               	movwf	1420
+   125                           
+   126                           ;
+   127                           ; multiply & acc:
+   128                           ;
+   129  0296  018F               	clrf	1423
+   130  0297  018E               	clrf	1422
+   131  0298  002C               	movlb	12
+   132  0299                     wait_3:	
+   133  0299  1B14               	btfsc	1556,6
+   134  029A  2A99               	bra	wait_3
+   135  029B  002B               	movlb	11
+   136                           
+   137                           ;
+   138                           ; acc += y[n-1] * a[0]
+   139                           ;
+   140  029C  3F07               	moviw [7]fsr0
+   141  029D  0091               	movwf	1425
+   142  029E  3F06               	moviw [6]fsr0
+   143  029F  0090               	movwf	1424
+   144  02A0  3F0D               	moviw [13]fsr0
+   145  02A1  008D               	movwf	1421
+   146  02A2  3F0C               	moviw [12]fsr0
+   147  02A3  008C               	movwf	1420
+   148                           
+   149                           ;
+   150                           ; multiply & acc:
+   151                           ;
+   152  02A4  018F               	clrf	1423
+   153  02A5  018E               	clrf	1422
+   154  02A6  002C               	movlb	12
+   155  02A7                     wait_4:	
+   156  02A7  1B14               	btfsc	1556,6
+   157  02A8  2AA7               	bra	wait_4
+   158                           
+   159                           ;
+   160                           ; acc += y[n-2] * b[0]
+   161                           ;
+   162  02A9  3F09               	moviw [9]fsr0
+   163  02AA  0091               	movwf	1425
+   164  02AB  3F08               	moviw [8]fsr0
+   165  02AC  0090               	movwf	1424
+   166  02AD  3F0F               	moviw [15]fsr0
+   167  02AE  008D               	movwf	1421
+   168  02AF  3F0E               	moviw [14]fsr0
+   169  02B0  008C               	movwf	1420
+   170                           
+   171                           ;
+   172                           ; multiply & acc:
+   173                           ;
+   174  02B1  018F               	clrf	1423
+   175  02B2  018E               	clrf	1422
+   176  02B3  002C               	movlb	12
+   177  02B4                     wait_5:	
+   178  02B4  1B14               	btfsc	1556,6
+   179  02B5  2AB4               	bra	wait_5
+   180  02B6  002B               	movlb	11
+   181                           
+   182                           ;
+   183                           ; Store the result on output (gather only the upper 16bits)
+   184                           ;
+   185  02B7  0819               	movf	1433,w
+   186  02B8  3F8B               	movwi [11]fsr0
+   187  02B9  0818               	movf	1432,w
+   188  02BA  3F8A               	movwi [10]fsr0
+   189                           
+   190                           ;
+   191                           ; Update filter history:
+   192                           ;
+   193                           ;
+   194                           ; shift x input samples:
+   195                           ;
+   196  02BB  3F02               	moviw [2]fsr0
+   197  02BC  3F84               	movwi [4]fsr0
+   198  02BD  3F03               	moviw [3]fsr0
+   199  02BE  3F85               	movwi [5]fsr0
+   200  02BF  3F00               	moviw [0]fsr0
+   201  02C0  3F82               	movwi [2]fsr0
+   202  02C1  3F01               	moviw [1]fsr0
+   203  02C2  3F83               	movwi [3]fsr0
+   204                           
+   205                           ;
+   206                           ; shift y output samples:
+   207                           ;
+   208  02C3  3F06               	moviw [6]fsr0
+   209  02C4  3F88               	movwi [8]fsr0
+   210  02C5  3F07               	moviw [7]fsr0
+   211  02C6  3F89               	movwi [9]fsr0
+   212  02C7  3F0A               	moviw [10]fsr0
+   213  02C8  3F86               	movwi [6]fsr0
+   214  02C9  3F0B               	moviw [11]fsr0
+   215  02CA  3F87               	movwi [7]fsr0
+   216                           
+   217                           ;
+   218                           ; all done ;D
+   219                           ;
+   220                           ;
+   221                           ; restore w,fsr & bsr
+   222                           ;
+   223  02CB  0867               	movf	bsrTmp& (0+127),w
+   224  02CC  0088               	movwf	8
+   225  02CD  0008               	return
+
+
+Microchip Technology PIC Macro Assembler V1.35 build -356382666 
+Symbol Table                                                                                               Sun Jan 24 20:09:41 2016
+
+                             BSR 0008                            bsrTmp 0267                            wait_1 027D  
+                          wait_2 028B                            wait_3 0299                            wait_4 02A7  
+                          wait_5 02B4                           PID1K1H 0591                           PID1K1L 0590  
+                         PID1CON 0614                           PID1INH 058F                           PID1INL 058E  
+              _iirFilter_2nd_Ord 0268                          PID1ACCU 0613                          PID1SETH 058D  
+                        PID1SETL 058C                     currentOutput 000A                         PID1ACCHH 0612  
+                       PID1ACCHL 0611                         PID1ACCLH 0610                         PID1ACCLL 060F  
+                       PID1OUTHH 0599                         PID1OUTHL 0598                      pCoefTable_a 000C  
+                    pCoefTable_b 0010                        inputState 0000                       outputState 0006  

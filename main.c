@@ -1,10 +1,19 @@
-/*
- * File:   main.c
- * Author: felipeneves
- *
- * Created on January 14, 2016, 12:57 AM
- */
-
+//
+//          WWW.EMBARCADOS.COM.BR
+//  
+//  Digital Filter with Curiosity Board
+//
+//  @file   main.c
+//  @brief  Our main application file.
+//
+//  In this experiment our PIC which hardware is configured with MCC, takes
+//  ADC conversion result at RA1 with a 8KHz rate, then fill a ping-pong buffer
+//  structure. Since one of this adc samples is collected, a event is generated
+//  and the application filter this block sample then copy these filtered sample
+//  to another ping-pong buffer which, at same 8KHz rate, feeds the DAC with the
+//  filtered signal which appears on RA0. With this approach and optimized filter, 
+//  we consupted only 16% of CPU.
+//  
 
 #include <xc.h>
 #include <stdint.h>
@@ -37,7 +46,10 @@
 //
 #define BUFF_SIZE 64 //ping pong buffer size
 
-
+//
+//
+// ping pong buffer strucutre 
+//
 struct pingpong
 {
     uint16_t pingpongBuffer[2][BUFF_SIZE];
@@ -68,8 +80,8 @@ const int16_t iirCoef_b[3] = {__IQ(0.337f),__IQ(0.0067f),__IQ(0.337f),};//Filter
 //
 // Timing stuff variables:
 //
-static uint8_t  timeQuanta = 0;
-static uint16_t tickCounter = 0;
+static uint8_t  timeQuanta = 0;  //Time quanta, incremented every tick
+static uint16_t tickCounter = 0; //1 ms ticker
 #define TIME_QUANTA 8
 
 
@@ -78,7 +90,11 @@ static uint16_t tickCounter = 0;
 //
 
 //
-// Update tick:
+// @fn UpdateTick() 
+// @brief This rotine is called externally by TMR1 interrupt.
+//         Update timing variables
+// @param  none
+// @return none
 //
 void UpdateTick(void)
 {
@@ -91,7 +107,12 @@ void UpdateTick(void)
 }
 
 //
-// SignalProcessEngine()
+//  @fn SignalProcessEngine()
+//  @brief This routine is called externally by ADC interrupt, 
+//         Its collect ADC samples, and feeds DAC at same time,
+//         filling ADC buffer and consuming DAC buffer. 
+// @param none
+// @retrn none
 //
 void SignalProcessEngine(void)
 {
@@ -103,7 +124,7 @@ void SignalProcessEngine(void)
     
 
     
-    //Get new value arrived from ADC and convert it to Q15:
+    //Get new value arrived from ADC and convert it to IQ15:
     adcBuffer.pingpongBuffer[adcBuffer.activeBuffer][adcBuffer.activeBufferCurrentPosition] =
             (ADC1_GetConversionResult() >> 1);
     
@@ -150,7 +171,6 @@ void main(void)
 { 
     uint16_t i = 0;
     uint16_t timeCurrent = 0;
-    //int16_t  tmpVal = 0;
     
     //
     // Init the hardware:
@@ -215,9 +235,6 @@ void main(void)
                 // Filter the sample:
                 //
                 iirDoFilter(iirStructure, adcBuffer.pingpongBuffer[inactiveBuffer][i]);
-    
-                
-                //tmpVal = adcBuffer.pingpongBuffer[inactiveBuffer][i];
                 
                 //
                 // Copy filtered result to dac buffer:
@@ -226,7 +243,6 @@ void main(void)
                 
                 dacBuffer.pingpongBuffer[inactiveBuffer][i] = iirGetOutValue(iirStructure);
                 
-                //dacBuffer.pingpongBuffer[inactiveBuffer][i] = tmpVal;
                 //
                 //take the inactcive adc buffer:
                 //
